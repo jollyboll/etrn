@@ -97,7 +97,7 @@ window.logout = async () => {
     localStorage.clear();
     sessionStorage.clear();
     currentUser = null;
-    window.location.href = '/';
+    window.location.href = '/etrn/';
 };
 
 // ==================== ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ====================
