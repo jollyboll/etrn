@@ -97,7 +97,7 @@ window.logout = async () => {
     localStorage.clear();
     sessionStorage.clear();
     currentUser = null;
-    window.location.href = '/etrn/';
+    window.location.href = './';
 };
 
 // ==================== ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ====================
@@ -286,7 +286,7 @@ function initButtons() {
     if (startNowBtn) {
         startNowBtn.addEventListener('click', () => {
             if (currentUser) {
-                window.location.href = '/app.html';
+                window.location.href = './app.html';
             } else {
                 isLoginMode = false;
                 showModal();
@@ -297,7 +297,7 @@ function initButtons() {
     if (ctaRegisterBtn) {
         ctaRegisterBtn.addEventListener('click', () => {
             if (currentUser) {
-                window.location.href = '/app.html';
+                window.location.href = './app.html';
             } else {
                 isLoginMode = false;
                 showModal();
