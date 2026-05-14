@@ -223,12 +223,12 @@ function initAuthModal() {
             if (isLoginMode) {
                 const { error } = await sb.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                window.location.href = '/app.html';
+                window.location.href = './app.html';
             } else {
                 const { error } = await sb.auth.signUp({
                     email,
                     password,
-                    options: { emailRedirectTo: window.location.origin + '/app.html' }
+                    options: { emailRedirectTo: window.location.origin + './app.html' }
                 });
                 if (error) throw error;
                 
