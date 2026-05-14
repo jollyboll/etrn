@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НефтеТрейд | Формирователь XML для ЭТрН</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="landing-header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-oil-can"></i>
+                <span>НефтеТрейд</span>
+            </div>
+            <nav class="main-nav">
+                <a href="#features">Возможности</a>
+                <a href="#how-it-works">Как работает</a>
+                <a href="#pricing">Тарифы</a>
+                <a href="#about">О проекте</a>
+            </nav>
+            <div class="header-buttons" style="display: flex; align-items: center; gap: 15px;">
+                <div id="userInfoHeader" style="display: none; align-items: center; gap: 10px;">
+                    <i class="fas fa-user-circle" style="color: #1a5d85; font-size: 1.2rem;"></i>
+                    <span id="headerUserEmail" style="font-size: 0.85rem; color: #1a3d52;"></span>
+                </div>
+                <button class="btn btn-outline-light" id="loginBtn">Вход</button>
+                <button class="btn btn-primary-light" id="registerBtn">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-carousel">
+            <div class="carousel-slide active" style="background-image: url('img/gifs/slide1.gif');"></div>
+            <div class="carousel-slide" style="background-image: url('img/gifs/slide2.gif');"></div>
+            <div class="carousel-slide" style="background-image: url('img/gifs/slide3.gif');"></div>
+            <div class="carousel-overlay"></div>
+            <div class="carousel-content">
+                <h1>Формирование XML <br>для ЭТрН за 5 минут</h1>
+                <p>Профессиональный инструмент для создания транспортных накладных формата Т1<br>в соответствии с требованиями ФНС России</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" id="startNowBtn">Начать бесплатно</button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Возможности сервиса</h2>
+                <p>Всё необходимое для быстрого создания документов</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                    <h3>Локальное хранение</h3>
+                    <p>Все данные хранятся в IndexedDB на вашем устройстве. Полный контроль над информацией.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Готовые шаблоны</h3>
+                    <p>Предустановленные данные для быстрого старта: контрагенты, ТС, водители, продукты.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <h3>4 формата XML</h3>
+                    <p>Поддержка различных форматов ЭДО: СБИС, Контур, Такском, Тензор.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Экспорт/Импорт</h3>
+                    <p>Бекап и восстановление базы данных через JSON файлы.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Умный поиск</h3>
+                    <p>Быстрый поиск по всем категориям базы данных.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Автоматические расчёты</h3>
+                    <p>Автоматический пересчёт объёма из массы и плотности.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Как это работает</h2>
+                <p>Три простых шага к готовому документу</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+                    <h3>Регистрация</h3>
+                    <p>Создайте аккаунт за 30 секунд</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-edit"></i></div>
+                    <h3>Заполнение</h3>
+                    <p>Выберите данные из базы или добавьте новые</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-download"></i></div>
+                    <h3>Скачивание</h3>
+                    <p>Получите готовый XML файл для ЭТрН</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Тарифы</h2>
+                <p>Выберите подходящий план</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Бесплатный</h3>
+                        <div class="price">0 ₽</div>
+                        <p>Для ознакомления</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> До 5 контрагентов в каждой категории</li>
+                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
+                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
+                            <li><i class="fas fa-times"></i> Облачное резервное копирование</li>
+                            <li><i class="fas fa-times"></i> Приоритетная поддержка</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-outline pricing-btn">Выбрать</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Рекомендуемый</div>
+                    <div class="pricing-header">
+                        <h3>PRO</h3>
+                        <div class="price">По запросу</div>
+                        <p>Для профессионалов</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <strong>Неограниченно</strong> контрагентов</li>
+                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
+                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
+                            <li><i class="fas fa-check"></i> Облачное резервное копирование</li>
+                            <li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary pricing-btn">Перейти на PRO</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Корпоративный</h3>
+                        <div class="price">По запросу</div>
+                        <p>Для команд</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Всё из PRO</li>
+                            <li><i class="fas fa-check"></i> До 5 пользователей</li>
+                            <li><i class="fas fa-check"></i> Общая база данных</li>
+                            <li><i class="fas fa-check"></i> API доступ</li>
+                            <li><i class="fas fa-check"></i> SLA 99.9%</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-outline pricing-btn">Связаться</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О проекте</h2>
+                    <p><strong>НефтеТрейд</strong> — специализированный онлайн-сервис для формирования XML документов транспортной накладной (титул Т1) для системы ЭТрН.</p>
+                    <p>Сервис полностью соответствует требованиям Приказа ФНС России и поддерживает актуальную версию формата 5.03.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Пользователей</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5 000+</span>
+                            <span class="stat-label">Документов создано</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">99.9%</span>
+                            <span class="stat-label">Соответствие формату</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Безопасность</h4>
+                            <p>Данные не покидают ваше устройство</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Постоянное обновление</h4>
+                            <p>Следим за изменениями в законодательстве</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>Поддержка</h4>
+                            <p>Помогаем 24/7 в чате и по email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Готовы начать работать с ЭТрН?</h2>
+            <p>Зарегистрируйтесь сейчас и получите доступ к полному функционалу сервиса</p>
+            <button class="btn btn-primary btn-large" id="ctaRegisterBtn">Зарегистрироваться бесплатно</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-oil-can"></i>
+                        <span>НефтеТрейд</span>
+                    </div>
+                    <p>Профессиональный инструмент для формирования XML документов ЭТрН</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Продукт</h4>
+                    <ul>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#pricing">Тарифы</a></li>
+                        <li><a href="#">Документация</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Правовая информация</h4>
+                    <ul>
+                        <li><a href="/privacy.html">Политика конфиденциальности</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 НефтеТрейд. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 id="authModalTitle">Вход в аккаунт</h3>
+                <button class="close-modal auth-close">&times;</button>
+            </div>
+            <div class="modal-fields">
+                <form id="authForm">
+                    <div class="form-group">
+                        <input type="email" id="authEmail" class="glass-input" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="authPassword" class="glass-input" placeholder="Пароль" required>
+                    </div>
+                    <div class="form-group" id="privacyCheckbox" style="display: none;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="privacyConsent" style="width: auto;">
+                            <span style="font-size: 0.8rem;">Я принимаю <a href="/privacy.html" target="_blank">политику обработки персональных данных</a></span>
+                        </label>
+                    </div>
+                    <div id="authError" class="auth-error" style="display: none;"></div>
+                    <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width: 100%;">Войти</button>
+                </form>
+                <div class="auth-switch">
+                    <span id="authSwitchText">Нет аккаунта? <a href="#" class="switch-link">Зарегистрироваться</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+	<script src="js/landing.js"></script>
+</body>
+</html>
