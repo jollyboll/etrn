@@ -97,7 +97,7 @@ window.logout = async () => {
     localStorage.clear();
     sessionStorage.clear();
     currentUser = null;
-    window.location.href = './';
+    window.location.href = '/etrn/';
 };
 
 // ==================== ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ====================
@@ -143,7 +143,6 @@ function initAuthModal() {
     authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
     
-    // Проверяем, что модальное окно существует на этой странице
     if (!authModal || !authForm) {
         console.log('Auth modal not found on this page (expected on landing page only)');
         return;
@@ -209,9 +208,10 @@ function initAuthModal() {
             return;
         }
         
+        // Проверка согласия при регистрации
         if (!isLoginMode && privacyCheckbox && !privacyCheckbox.checked) {
             if (errorDiv) {
-                errorDiv.textContent = 'Необходимо согласие с политикой безопасности';
+                errorDiv.textContent = 'Необходимо согласие с политикой обработки персональных данных';
                 errorDiv.style.display = 'block';
             }
             return;
@@ -223,12 +223,12 @@ function initAuthModal() {
             if (isLoginMode) {
                 const { error } = await sb.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                window.location.href = './app.html';
+                window.location.href = '/etrn/app.html';
             } else {
                 const { error } = await sb.auth.signUp({
                     email,
                     password,
-                    options: { emailRedirectTo: window.location.origin + './app.html' }
+                    options: { emailRedirectTo: window.location.origin + '/etrn/app.html' }
                 });
                 if (error) throw error;
                 
@@ -256,58 +256,100 @@ function initAuthModal() {
 }
 
 function initButtons() {
-    const showModal = () => {
-        if (authModal) authModal.style.display = 'flex';
-    };
-    
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
     const startNowBtn = document.getElementById('startNowBtn');
     const ctaRegisterBtn = document.getElementById('ctaRegisterBtn');
     
+    // Функция для принудительного обновления содержимого модального окна
+    const showModalWithMode = (mode) => {
+        isLoginMode = mode;
+        
+        // Обновляем содержимое модального окна
+        const title = document.getElementById('authModalTitle');
+        const btn = document.getElementById('authSubmitBtn');
+        const switchText = document.getElementById('authSwitchText');
+        const privacyBlock = document.getElementById('privacyCheckbox');
+        
+        if (title && btn && switchText) {
+            if (mode) {  // mode = true = вход
+                title.textContent = 'Вход в аккаунт';
+                btn.textContent = 'Войти';
+                switchText.innerHTML = 'Нет аккаунта? <a href="#" class="switch-link">Зарегистрироваться</a>';
+                if (privacyBlock) privacyBlock.style.display = 'none';
+            } else {  // mode = false = регистрация
+                title.textContent = 'Регистрация';
+                btn.textContent = 'Зарегистрироваться';
+                switchText.innerHTML = 'Уже есть аккаунт? <a href="#" class="switch-link">Войти</a>';
+                if (privacyBlock) privacyBlock.style.display = 'block';
+            }
+            
+            // Обновляем обработчик переключения
+            const newLink = switchText.querySelector('.switch-link');
+            if (newLink) {
+                newLink.onclick = (e) => {
+                    e.preventDefault();
+                    showModalWithMode(!isLoginMode);
+                };
+            }
+        }
+        
+        if (authModal) authModal.style.display = 'flex';
+    };
+    
+    // Кнопка "Вход"
     if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-            isLoginMode = true;
-            showModal();
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showModalWithMode(true);  // true = форма входа
         });
     }
     
+    // Кнопка "Регистрация"
     if (registerBtn) {
-        registerBtn.addEventListener('click', () => {
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (currentUser) {
                 window.logout();
             } else {
-                isLoginMode = false;
-                showModal();
+                showModalWithMode(false);  // false = форма регистрации
             }
         });
     }
     
+    // Кнопка "Начать бесплатно"
     if (startNowBtn) {
-        startNowBtn.addEventListener('click', () => {
+        startNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (currentUser) {
-                window.location.href = './app.html';
+                window.location.href = '/etrn/app.html';
             } else {
-                isLoginMode = false;
-                showModal();
+                showModalWithMode(false);  // false = форма регистрации
             }
         });
     }
     
+    // Кнопка "Зарегистрироваться" в CTA блоке
     if (ctaRegisterBtn) {
-        ctaRegisterBtn.addEventListener('click', () => {
+        ctaRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (currentUser) {
-                window.location.href = './app.html';
+                window.location.href = '/etrn/app.html';
             } else {
-                isLoginMode = false;
-                showModal();
+                showModalWithMode(false);  // false = форма регистрации
             }
         });
     }
     
+    // Кнопки тарифов
     document.querySelectorAll('.pricing-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('ПРО версия: неограниченное количество контрагентов. Свяжитесь: pro@neftetrade.ru');
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentUser) {
+                alert('ПРО версия: неограниченное количество контрагентов. Свяжитесь: pro@neftetrade.ru');
+            } else {
+                showModalWithMode(false);
+            }
         });
     });
 }
