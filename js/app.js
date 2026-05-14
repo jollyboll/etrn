@@ -73,7 +73,7 @@ async function initApp() {
     
     if (!currentUser) {
         if (statusMsg) statusMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Требуется авторизация...';
-        setTimeout(() => window.location.href = '/', 1500);
+        setTimeout(() => window.location.href = '/etrn/', 1500);
         return;
     }
     
