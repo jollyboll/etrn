@@ -2,7 +2,7 @@
 
 let authModal = null;
 let isLoginMode = true;
-let supabaseClient = null;  // Изменено с 'sb' на 'supabaseClient'
+let supabaseClient = null;
 let currentUser = null;
 
 const SUPABASE_URL = 'https://iftyzkwgzjlrbkegjwah.supabase.co';
@@ -96,7 +96,7 @@ window.logout = async () => {
     localStorage.clear();
     sessionStorage.clear();
     currentUser = null;
-    window.location.href = '/etrn/';
+    window.location.href = '/';
 };
 
 // ==================== ФУНКЦИИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ====================
@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSupabase();
     initCarousel();
     initAuthModal();
+    initProModal();
     initButtons();
     checkAuthStatus();
 });
@@ -138,6 +139,42 @@ function initCarousel() {
     startCarousel();
 }
 
+function initProModal() {
+    const proModal = document.getElementById('proModal');
+    const proBtn = document.getElementById('proBtn');
+    const closeBtns = document.querySelectorAll('.pro-close');
+    
+    if (!proModal || !proBtn) return;
+    
+    proBtn.onclick = () => {
+        proModal.style.display = 'flex';
+    };
+    
+    closeBtns.forEach(btn => {
+        btn.onclick = () => {
+            proModal.style.display = 'none';
+        };
+    });
+    
+    window.onclick = (e) => {
+        if (e.target === proModal) proModal.style.display = 'none';
+    };
+    
+    // Обработчики для кнопок подключения
+    document.querySelectorAll('.btn-pro-select').forEach(btn => {
+        btn.onclick = () => {
+            if (currentUser) {
+                alert(`Оплата тарифа ${btn.dataset.plan === 'month' ? '1 месяц (250 ₽)' : '6 месяцев (1000 ₽)'}\n\nПосле оплаты PRO активируется автоматически.\nСпособ оплаты: перевод на карту по ссылке, которую мы отправим на email.`);
+                proModal.style.display = 'none';
+            } else {
+                alert('Сначала зарегистрируйтесь или войдите в аккаунт');
+                proModal.style.display = 'none';
+                if (authModal) authModal.style.display = 'flex';
+            }
+        };
+    });
+}
+
 function initAuthModal() {
     authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
@@ -152,6 +189,11 @@ function initAuthModal() {
     if (closeBtn) {
         closeBtn.onclick = () => {
             authModal.style.display = 'none';
+            const errorDiv = document.getElementById('authError');
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+                errorDiv.className = 'auth-error';
+            }
         };
     }
     
@@ -176,7 +218,7 @@ function initAuthModal() {
             title.textContent = 'Регистрация';
             btn.textContent = 'Зарегистрироваться';
             switchText.innerHTML = 'Уже есть аккаунт? <a href="#" class="switch-link">Войти</a>';
-            if (privacyBlock) privacyBlock.style.display = 'block';
+            if (privacyBlock) privacyBlock.style.display = 'flex';
         }
         
         const newLink = switchText.querySelector('.switch-link');
@@ -184,6 +226,12 @@ function initAuthModal() {
             newLink.onclick = (e) => {
                 e.preventDefault();
                 isLoginMode = !isLoginMode;
+                document.getElementById('authForm').reset();
+                const errorDiv = document.getElementById('authError');
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                    errorDiv.className = 'auth-error';
+                }
                 updateModalContent();
             };
         }
@@ -199,6 +247,11 @@ function initAuthModal() {
         const privacyCheckbox = document.getElementById('privacyConsent');
         const errorDiv = document.getElementById('authError');
         
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+            errorDiv.className = 'auth-error';
+        }
+        
         if (!email || !password) {
             if (errorDiv) {
                 errorDiv.textContent = 'Заполните все поля';
@@ -209,44 +262,48 @@ function initAuthModal() {
         
         if (!isLoginMode && privacyCheckbox && !privacyCheckbox.checked) {
             if (errorDiv) {
-                errorDiv.textContent = 'Необходимо согласие с политикой безопасности';
+                errorDiv.textContent = 'Необходимо согласие с политикой обработки персональных данных';
                 errorDiv.style.display = 'block';
             }
             return;
         }
         
-        if (errorDiv) errorDiv.style.display = 'none';
-        
         try {
             if (isLoginMode) {
                 const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                window.location.href = '/etrn/app.html';
+                window.location.href = '/app.html';
             } else {
-                const { error } = await supabaseClient.auth.signUp({
+                const { error, data } = await supabaseClient.auth.signUp({
                     email,
                     password,
-                    options: { emailRedirectTo: window.location.origin + '/etrn/app.html' }
+                    options: { emailRedirectTo: window.location.origin + '/app.html' }
                 });
+                
                 if (error) throw error;
                 
                 if (errorDiv) {
-                    errorDiv.textContent = 'Регистрация успешна! Теперь войдите.';
-                    errorDiv.style.color = '#4caf50';
+                    errorDiv.textContent = '✅ Регистрация успешна! На вашу почту отправлено письмо для подтверждения. После подтверждения войдите в аккаунт.';
+                    errorDiv.className = 'auth-success';
                     errorDiv.style.display = 'block';
                 }
+                
+                document.getElementById('authForm').reset();
+                if (privacyCheckbox) privacyCheckbox.checked = false;
                 
                 setTimeout(() => {
                     isLoginMode = true;
                     updateModalContent();
-                    document.getElementById('authForm').reset();
-                    if (errorDiv) errorDiv.style.display = 'none';
-                }, 2000);
+                    if (errorDiv) {
+                        errorDiv.style.display = 'none';
+                        errorDiv.className = 'auth-error';
+                    }
+                }, 3000);
             }
         } catch (err) {
             if (errorDiv) {
                 errorDiv.textContent = err.message;
-                errorDiv.style.color = '#f44336';
+                errorDiv.className = 'auth-error';
                 errorDiv.style.display = 'block';
             }
         }
@@ -264,6 +321,12 @@ function initButtons() {
         const btn = document.getElementById('authSubmitBtn');
         const switchText = document.getElementById('authSwitchText');
         const privacyBlock = document.getElementById('privacyCheckbox');
+        const errorDiv = document.getElementById('authError');
+        
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+            errorDiv.className = 'auth-error';
+        }
         
         if (title) title.textContent = mode ? 'Вход в аккаунт' : 'Регистрация';
         if (btn) btn.textContent = mode ? 'Войти' : 'Зарегистрироваться';
@@ -272,7 +335,7 @@ function initButtons() {
                 ? 'Нет аккаунта? <a href="#" class="switch-link">Зарегистрироваться</a>'
                 : 'Уже есть аккаунт? <a href="#" class="switch-link">Войти</a>';
         }
-        if (privacyBlock) privacyBlock.style.display = mode ? 'none' : 'block';
+        if (privacyBlock) privacyBlock.style.display = mode ? 'none' : 'flex';
         
         const newLink = switchText?.querySelector('.switch-link');
         if (newLink) {
@@ -288,7 +351,6 @@ function initButtons() {
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
     const startNowBtn = document.getElementById('startNowBtn');
-    const ctaRegisterBtn = document.getElementById('ctaRegisterBtn');
     
     if (loginBtn) {
         loginBtn.onclick = () => showModalWithMode(true);
@@ -307,28 +369,12 @@ function initButtons() {
     if (startNowBtn) {
         startNowBtn.onclick = () => {
             if (currentUser) {
-                window.location.href = '/etrn/app.html';
+                window.location.href = '/app.html';
             } else {
                 showModalWithMode(false);
             }
         };
     }
-    
-    if (ctaRegisterBtn) {
-        ctaRegisterBtn.onclick = () => {
-            if (currentUser) {
-                window.location.href = '/etrn/app.html';
-            } else {
-                showModalWithMode(false);
-            }
-        };
-    }
-    
-    document.querySelectorAll('.pricing-btn').forEach(btn => {
-        btn.onclick = () => {
-            alert('ПРО версия: неограниченное количество контрагентов. Свяжитесь: pro@neftetrade.ru');
-        };
-    });
 }
 
 async function checkAuthStatus() {
@@ -342,10 +388,20 @@ async function checkAuthStatus() {
     
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
+    const userInfoHeader = document.getElementById('userInfoHeader');
+    const headerUserEmail = document.getElementById('headerUserEmail');
     
     if (currentUser && loginBtn && registerBtn) {
         loginBtn.style.display = 'none';
         registerBtn.textContent = 'Выйти';
+        if (userInfoHeader) {
+            userInfoHeader.style.display = 'flex';
+            if (headerUserEmail) headerUserEmail.textContent = currentUser.email;
+        }
+    } else if (loginBtn && registerBtn) {
+        loginBtn.style.display = 'inline-block';
+        registerBtn.textContent = 'Регистрация';
+        if (userInfoHeader) userInfoHeader.style.display = 'none';
     }
 }
 
