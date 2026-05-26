@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>НефтеТрейд | Формирователь XML для ЭТрН</title>
+    <title>ЭТРН.online | XML для ЭТрН</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/landing.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="landing-header">
         <div class="container">
             <div class="logo">
-                <i class="fas fa-oil-can"></i>
-                <span>НефтеТрейд</span>
+                <span class="logo-text">XML для ЭТрН</span>
+                <span class="logo-domain">.online</span>
             </div>
             <nav class="main-nav">
                 <a href="#features">Возможности</a>
                 <a href="#how-it-works">Как работает</a>
-                <a href="#pricing">Тарифы</a>
                 <a href="#about">О проекте</a>
             </nav>
-            <div class="header-buttons" style="display: flex; align-items: center; gap: 15px;">
+            <div class="header-buttons">
                 <div id="userInfoHeader" style="display: none; align-items: center; gap: 10px;">
                     <i class="fas fa-user-circle" style="color: #1a5d85; font-size: 1.2rem;"></i>
                     <span id="headerUserEmail" style="font-size: 0.85rem; color: #1a3d52;"></span>
                 </div>
                 <button class="btn btn-outline-light" id="loginBtn">Вход</button>
                 <button class="btn btn-primary-light" id="registerBtn">Регистрация</button>
+                <button class="btn btn-pro" id="proBtn">
+                    <i class="fas fa-crown"></i> Перейти на PRO
+                </button>
             </div>
         </div>
     </header>
@@ -87,9 +89,9 @@
                     <p>Быстрый поиск по всем категориям базы данных.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                    <div class="feature-icon"><i class="fas fa-calculator"></i></div>
                     <h3>Автоматические расчёты</h3>
-                    <p>Автоматический пересчёт объёма из массы и плотности.</p>
+                    <p>Автоматический пересчёт объёма из массы и плотности для отгрузки продуктов.</p>
                 </div>
             </div>
         </div>
@@ -126,123 +128,240 @@
         </div>
     </section>
 
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>Тарифы</h2>
-                <p>Выберите подходящий план</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Бесплатный</h3>
-                        <div class="price">0 ₽</div>
-                        <p>Для ознакомления</p>
-                    </div>
-                    <div class="pricing-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> До 5 контрагентов в каждой категории</li>
-                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
-                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
-                            <li><i class="fas fa-times"></i> Облачное резервное копирование</li>
-                            <li><i class="fas fa-times"></i> Приоритетная поддержка</li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-outline pricing-btn">Выбрать</button>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="popular-badge">Рекомендуемый</div>
-                    <div class="pricing-header">
-                        <h3>PRO</h3>
-                        <div class="price">По запросу</div>
-                        <p>Для профессионалов</p>
-                    </div>
-                    <div class="pricing-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> <strong>Неограниченно</strong> контрагентов</li>
-                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
-                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
-                            <li><i class="fas fa-check"></i> Облачное резервное копирование</li>
-                            <li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-primary pricing-btn">Перейти на PRO</button>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Корпоративный</h3>
-                        <div class="price">По запросу</div>
-                        <p>Для команд</p>
-                    </div>
-                    <div class="pricing-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Всё из PRO</li>
-                            <li><i class="fas fa-check"></i> До 5 пользователей</li>
-                            <li><i class="fas fa-check"></i> Общая база данных</li>
-                            <li><i class="fas fa-check"></i> API доступ</li>
-                            <li><i class="fas fa-check"></i> SLA 99.9%</li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-outline pricing-btn">Связаться</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Секция "О проекте" - теперь это полноценная документация -->
     <section id="about" class="about">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>О проекте</h2>
-                    <p><strong>НефтеТрейд</strong> — специализированный онлайн-сервис для формирования XML документов транспортной накладной (титул Т1) для системы ЭТрН.</p>
-                    <p>Сервис полностью соответствует требованиям Приказа ФНС России и поддерживает актуальную версию формата 5.03.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Пользователей</span>
+            <div class="about-header">
+                <h2>О проекте</h2>
+                <p>ЭТРН.online — сервис для формирования XML транспортной накладной (титул Т1)</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Левая колонка - навигация по документации -->
+                <aside class="about-sidebar">
+                    <ul>
+                        <li><a href="#what-is-etrn" class="active">Что такое ЭТрН?</a></li>
+                        <li><a href="#why-xml">Зачем нужен XML?</a></li>
+                        <li><a href="#titles">Титулы ЭТрН</a></li>
+                        <li><a href="#xml-formats">Форматы XML</a></li>
+                        <li><a href="#edo-integration">Интеграция с ЭДО</a></li>
+                        <li><a href="#how-to-upload">Как загрузить XML</a></li>
+                        <li><a href="#database">База данных</a></li>
+                        <li><a href="#faq">Частые вопросы</a></li>
+                    </ul>
+                </aside>
+
+                <!-- Правая колонка - контент документации -->
+                <div class="about-content">
+                    <section id="what-is-etrn" class="about-section">
+                        <h3>Что такое ЭТрН?</h3>
+                        <p><strong>Электронная транспортная накладная (ЭТрН)</strong> — это юридически значимый электронный документ, который заменил бумажную транспортную накладную (ТОРГ-12) при перевозке грузов.</p>
+                        <p>С 2022 года все участники перевозочного процесса (грузоотправитель, перевозчик, грузополучатель) обязаны обмениваться транспортными накладными в электронном виде через операторов ЭДО.</p>
+                        <div class="info">
+                            <p><strong>Правовое основание:</strong> Приказ ФНС России от 21.11.2022 № ЕД-7-26/1119@, формат 5.03.</p>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">5 000+</span>
-                            <span class="stat-label">Документов создано</span>
+                        <p>ЭТрН позволяет:</p>
+                        <ul>
+                            <li>✅ Ускорить документооборот в 5-10 раз</li>
+                            <li>✅ Исключить потерю документов</li>
+                            <li>✅ Автоматически проверять данные</li>
+                            <li>✅ Снизить затраты на бумагу и курьерские услуги</li>
+                            <li>✅ Получить юридическую силу через КЭП</li>
+                        </ul>
+                    </section>
+
+                    <section id="why-xml" class="about-section">
+                        <h3>Зачем нужен XML файл?</h3>
+                        <p>XML (eXtensible Markup Language) — это универсальный формат обмена данными, который используется операторами ЭДО для передачи транспортных накладных.</p>
+                        <p><strong>Наш сервис генерирует XML файл титула T1</strong>, который содержит все необходимые данные:</p>
+                        <ul>
+                            <li>📦 Информацию о грузоотправителе и грузополучателе</li>
+                            <li>🚛 Данные о перевозчике, транспортном средстве и водителе</li>
+                            <li>⛽ Сведения о продукте: масса, объём, плотность, температура, код ТН ВЭД</li>
+                            <li>📄 Номер и дату транспортной накладной</li>
+                        </ul>
+                        <div class="note">
+                            <p><strong>Важно:</strong> Сгенерированный XML файл вы загружаете в личный кабинет вашего оператора ЭДО, подписываете КЭП и отправляете контрагенту. Это полноценный юридически значимый документ.</p>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">99.9%</span>
-                            <span class="stat-label">Соответствие формату</span>
+                    </section>
+
+                    <section id="titles" class="about-section">
+                        <h3>Титулы ЭТрН</h3>
+                        <p>Электронная транспортная накладная состоит из нескольких титулов (разделов), каждый из которых заполняется определённым участником:</p>
+                        
+                        <div class="titles-grid">
+                            <div class="title-card">
+                                <div class="title-number">T1</div>
+                                <h4>Грузоотправитель</h4>
+                                <p>Заполняется грузоотправителем. Содержит информацию о сторонах перевозки, транспортном средстве, водителе, грузе (наименование, вес, объём, плотность, температура, код ТН ВЭД).</p>
+                                <div class="title-badge">Формирует наш сервис</div>
+                            </div>
+                            <div class="title-card">
+                                <div class="title-number">T2</div>
+                                <h4>Перевозчик</h4>
+                                <p>Заполняется перевозчиком. Подтверждает факт принятия груза к перевозке, указывает фактические даты и время.</p>
+                            </div>
+                            <div class="title-card">
+                                <div class="title-number">T3</div>
+                                <h4>Грузополучатель</h4>
+                                <p>Заполняется грузополучателем. Подтверждает факт получения груза, указывает фактическое количество и состояние груза.</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="about-features">
-                    <div class="about-feature">
-                        <i class="fas fa-shield-alt"></i>
-                        <div>
-                            <h4>Безопасность</h4>
-                            <p>Данные не покидают ваше устройство</p>
+                    </section>
+
+                    <section id="xml-formats" class="about-section">
+                        <h3>Форматы XML для ЭДО</h3>
+                        <p>Наш сервис поддерживает 4 основных формата XML, которые используются в России для обмена ЭТрН:</p>
+                        
+                        <div class="formats-grid">
+                            <div class="format-card">
+                                <h4>СБИС (Тензор)</h4>
+                                <p>Формат СБИС — один из самых распространённых в России. Используется в экосистеме СБИС (Тензор).</p>
+                                <div class="code-block">
+                                    <code>&lt;ON_TRNACLGROT xmlns="http://www.nalog.ru/..."&gt;</code>
+                                </div>
+                            </div>
+                            <div class="format-card">
+                                <h4>Контур</h4>
+                                <p>Формат Контур используется в системе Контур.Диадок — популярном операторе ЭДО.</p>
+                                <div class="code-block">
+                                    <code>&lt;Waybill xmlns="http://kontur.ru/edo/ttn"&gt;</code>
+                                </div>
+                            </div>
+                            <div class="format-card">
+                                <h4>Такском</h4>
+                                <p>Формат Такском — стандарт оператора ЭДО Такском.</p>
+                                <div class="code-block">
+                                    <code>&lt;TTN xmlns="http://takskom.ru/edo/ttn/1.0"&gt;</code>
+                                </div>
+                            </div>
+                            <div class="format-card">
+                                <h4>Тензор</h4>
+                                <p>Альтернативный формат от компании Тензор.</p>
+                                <div class="code-block">
+                                    <code>&lt;Document xmlns="http://tensor.ru/edo/ttn"&gt;</code>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="about-feature">
-                        <i class="fas fa-chart-line"></i>
-                        <div>
-                            <h4>Постоянное обновление</h4>
-                            <p>Следим за изменениями в законодательстве</p>
+                        <p><strong>Как выбрать формат?</strong> Узнайте у вашего оператора ЭДО, какой формат он поддерживает, и выберите соответствующий в настройках генерации.</p>
+                    </section>
+
+                    <section id="edo-integration" class="about-section">
+                        <h3>Интеграция с ЭДО (как происходит обмен)</h3>
+                        <p>Процесс обмена ЭТрН через оператора ЭДО выглядит следующим образом:</p>
+                        
+                        <div class="steps-flow">
+                            <div class="flow-step">
+                                <div class="flow-number">1</div>
+                                <div class="flow-text"><strong>Создание XML</strong> — вы заполняете форму в нашем сервисе и получаете XML файл титула T1.</div>
+                            </div>
+                            <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                            <div class="flow-step">
+                                <div class="flow-number">2</div>
+                                <div class="flow-text"><strong>Загрузка в ЭДО</strong> — вы загружаете XML файл в личный кабинет вашего оператора ЭДО (СБИС, Контур, Такском и др.).</div>
+                            </div>
+                            <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                            <div class="flow-step">
+                                <div class="flow-number">3</div>
+                                <div class="flow-text"><strong>Отправка перевозчику</strong> — оператор ЭДО отправляет документ перевозчику через его оператора.</div>
+                            </div>
+                            <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                            <div class="flow-step">
+                                <div class="flow-number">4</div>
+                                <div class="flow-text"><strong>Подписание</strong> — перевозчик подписывает титул T2 своей КЭП, грузополучатель — титул T3.</div>
+                            </div>
+                            <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                            <div class="flow-step">
+                                <div class="flow-number">5</div>
+                                <div class="flow-text"><strong>Статус</strong> — все участники видят статус подписания документа.</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="about-feature">
-                        <i class="fas fa-headset"></i>
-                        <div>
-                            <h4>Поддержка</h4>
-                            <p>Помогаем 24/7 в чате и по email</p>
+                        
+                        <div class="info">
+                            <p><strong>Взаимодействие операторов:</strong> Операторы ЭДО связаны между собой роумингом, поэтому документ может быть отправлен от СБИС в Контур и обратно.</p>
                         </div>
-                    </div>
+                    </section>
+
+                    <section id="how-to-upload" class="about-section">
+                        <h3>Как загрузить XML в ЭДО</h3>
+                        
+                        <h4>СБИС / Тензор</h4>
+                        <ul>
+                            <li>Войдите в личный кабинет СБИС</li>
+                            <li>Перейдите в раздел «ЭДО» → «Отправить документ»</li>
+                            <li>Выберите тип документа «Транспортная накладная»</li>
+                            <li>Загрузите XML файл</li>
+                            <li>Выберите контрагента-перевозчика и отправьте</li>
+                        </ul>
+
+                        <h4>Контур.Диадок</h4>
+                        <ul>
+                            <li>Войдите в Диадок</li>
+                            <li>Нажмите «Создать документ» → «Транспортная накладная»</li>
+                            <li>Загрузите XML файл или скопируйте содержимое</li>
+                            <li>Подпишите КЭП и отправьте контрагенту</li>
+                        </ul>
+
+                        <h4>Такском</h4>
+                        <ul>
+                            <li>Войдите в Такском-ЭДО</li>
+                            <li>Выберите «Создать документ» → «Загрузить из файла»</li>
+                            <li>Выберите XML файл и укажите тип документа</li>
+                            <li>Отправьте получателю</li>
+                        </ul>
+
+                        <div class="note">
+                            <p><strong>Внимание:</strong> XML файл не подписан КЭП. После загрузки в ЭДО обязательно подпишите документ своей квалифицированной электронной подписью (КЭП). Без подписи документ не имеет юридической силы.</p>
+                        </div>
+                    </section>
+
+                    <section id="database" class="about-section">
+                        <h3>База данных контрагентов</h3>
+                        <p>Наш сервис включает удобную локальную базу данных для хранения информации о ваших контрагентах:</p>
+                        <ul>
+                            <li><strong>Грузоотправители</strong> — ИНН, КПП, наименование, адрес, телефон</li>
+                            <li><strong>Грузополучатели</strong> — ИНН, КПП, наименование, адрес</li>
+                            <li><strong>Перевозчики</strong> — ИНН, КПП, наименование, вид транспорта</li>
+                            <li><strong>Водители</strong> — ФИО, номер удостоверения</li>
+                            <li><strong>Подписанты</strong> — ФИО, должность</li>
+                            <li><strong>Транспортные средства</strong> — регистрационный номер, национальность</li>
+                            <li><strong>Продукты</strong> — наименование, код ТН ВЭД, плотность по умолчанию</li>
+                        </ul>
+                        <div class="info">
+                            <p><strong>Все данные хранятся локально</strong> в вашем браузере (IndexedDB). Вы можете экспортировать их в JSON файл для резервного копирования или переноса на другой компьютер.</p>
+                        </div>
+                    </section>
+
+                    <section id="faq" class="about-section">
+                        <h3>Частые вопросы (FAQ)</h3>
+                        
+                        <div class="faq-item">
+                            <h4>Нужна ли КЭП для работы с вашим сервисом?</h4>
+                            <p>Нет, сам сервис не требует КЭП. Вы генерируете XML, а КЭП нужна для подписания документа в системе вашего оператора ЭДО.</p>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h4>Какие данные нужно заполнить для отгрузки?</h4>
+                            <p>Минимально необходимые: грузоотправитель (ИНН, название), грузополучатель (ИНН, название), перевозчик (ИНН, название), масса груза. Для продуктов с объёмом автоматически рассчитывается из массы и плотности.</p>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h4>Можно ли использовать сервис бесплатно?</h4>
+                            <p>Да, в бесплатной версии доступно до 5 записей в каждой категории. Для неограниченного количества — тариф PRO (250 ₽/мес или 1000 ₽/6 мес).</p>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h4>Где хранятся мои данные?</h4>
+                            <p>Все данные о контрагентах, ТС, водителях хранятся локально в вашем браузере (IndexedDB). Мы не передаём их на сервер.</p>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h4>Поддерживаются ли другие форматы XML?</h4>
+                            <p>На текущий момент поддерживаются 4 основных формата. При необходимости добавить новый формат — напишите нам на support@etrn.online.</p>
+                        </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <h2>Готовы начать работать с ЭТрН?</h2>
-            <p>Зарегистрируйтесь сейчас и получите доступ к полному функционалу сервиса</p>
-            <button class="btn btn-primary btn-large" id="ctaRegisterBtn">Зарегистрироваться бесплатно</button>
         </div>
     </section>
 
@@ -251,36 +370,36 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <i class="fas fa-oil-can"></i>
-                        <span>НефтеТрейд</span>
+                        <span>XML для ЭТрН</span>
+                        <span class="footer-domain">.online</span>
                     </div>
                     <p>Профессиональный инструмент для формирования XML документов ЭТрН</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Продукт</h4>
+                    <h4>Навигация</h4>
                     <ul>
                         <li><a href="#features">Возможности</a></li>
-                        <li><a href="#pricing">Тарифы</a></li>
-                        <li><a href="#">Документация</a></li>
+                        <li><a href="#how-it-works">Как работает</a></li>
+                        <li><a href="#about">О проекте</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Правовая информация</h4>
                     <ul>
-                        <li><a href="./privacy.html">Политика конфиденциальности</a></li>
+                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
                         <li><a href="#">Пользовательское соглашение</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 НефтеТрейд. Все права защищены.</p>
+                <p>&copy; 2024 ЭТРН.online. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
     <!-- Auth Modal -->
     <div id="authModal" class="modal">
-        <div class="modal-content glass-panel">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3 id="authModalTitle">Вход в аккаунт</h3>
                 <button class="close-modal auth-close">&times;</button>
@@ -288,16 +407,15 @@
             <div class="modal-fields">
                 <form id="authForm">
                     <div class="form-group">
-                        <input type="email" id="authEmail" class="glass-input" placeholder="Email" required>
+                        <input type="email" id="authEmail" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" id="authPassword" class="glass-input" placeholder="Пароль" required>
+                        <input type="password" id="authPassword" placeholder="Пароль" required>
                     </div>
-                    <!-- Галочка согласия - показывается только при регистрации -->
                     <div class="form-group" id="privacyCheckbox" style="display: none;">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                            <input type="checkbox" id="privacyConsent" style="width: auto;">
-                            <span style="font-size: 0.8rem;">Я принимаю <a href="/etrn/privacy.html" target="_blank">политику обработки персональных данных</a></span>
+                        <label class="privacy-checkbox">
+                            <input type="checkbox" id="privacyConsent">
+                            <span>Я принимаю <a href="privacy.html" target="_blank">политику обработки персональных данных</a></span>
                         </label>
                     </div>
                     <div id="authError" class="auth-error" style="display: none;"></div>
@@ -310,8 +428,78 @@
         </div>
     </div>
 
-	<script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-	<script src="js/landing.js"></script>
+    <!-- PRO Modal -->
+    <div id="proModal" class="modal">
+        <div class="modal-content pro-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-crown" style="color: #fbbf24;"></i> PRO тариф</h3>
+                <button class="close-modal pro-close">&times;</button>
+            </div>
+            <div class="modal-fields">
+                <div class="pro-plans">
+                    <div class="pro-plan">
+                        <div class="pro-plan-header">
+                            <h4>1 месяц</h4>
+                            <div class="pro-plan-price">250 ₽</div>
+                        </div>
+                        <ul class="pro-plan-features">
+                            <li><i class="fas fa-check"></i> Неограниченно контрагентов</li>
+                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
+                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
+                            <li><i class="fas fa-check"></i> Облачное резервное копирование</li>
+                            <li><i class="fas fa-check"></i> Приоритетная поддержка</li>
+                        </ul>
+                        <button class="btn btn-pro-select" data-plan="month">Подключить</button>
+                    </div>
+                    <div class="pro-plan popular">
+                        <div class="popular-badge">Выгодно</div>
+                        <div class="pro-plan-header">
+                            <h4>6 месяцев</h4>
+                            <div class="pro-plan-price">1 000 ₽</div>
+                            <div class="pro-plan-save">Экономия 500 ₽</div>
+                        </div>
+                        <ul class="pro-plan-features">
+                            <li><i class="fas fa-check"></i> Неограниченно контрагентов</li>
+                            <li><i class="fas fa-check"></i> XML генерация (4 формата)</li>
+                            <li><i class="fas fa-check"></i> Экспорт/Импорт</li>
+                            <li><i class="fas fa-check"></i> Облачное резервное копирование</li>
+                            <li><i class="fas fa-check"></i> Приоритетная поддержка</li>
+                        </ul>
+                        <button class="btn btn-pro-select" data-plan="halfyear">Подключить</button>
+                    </div>
+                </div>
+                <div class="pro-note">
+                    <i class="fas fa-lock"></i> Безопасная оплата. После оплаты PRO активируется автоматически.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        // Активная ссылка в сайдбаре при скролле
+        const sections = document.querySelectorAll('.about-section');
+        const navLinks = document.querySelectorAll('.about-sidebar a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
