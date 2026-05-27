@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>НефтеТрейд | ЭТрН Формирователь Т1 v2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="glass-header">
+			<button class="back-btn" id="backToLandingBtn" title="На главную">
+				<i class="fas fa-arrow-left"></i>
+			</button>
+            <div class="logo">
+                <img src="img/logo.png" alt="Логотип" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <i class="fas fa-oil-can" style="display: none;"></i>
+                <span>Формирователь XML для ЭТрН</span>
+                <small>ЭТрН v3.0 · Поддержка отсеков</small>
+            </div>
+            <div class="header-actions">
+                <span class="badge">Титул Т1 · Грузоотправитель · Новый формат</span>
+                <button class="icon-btn" id="refreshDbBtn" title="Обновить базу">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <!-- LEFT: Database Management -->
+            <aside class="glass-panel db-panel">
+                <div class="panel-header">
+                    <i class="fas fa-database"></i>
+                    <h3>База данных</h3>
+                    <div class="db-actions">
+                        <button class="icon-btn-small" id="exportAllBtn" title="Экспорт всей базы в JSON">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="icon-btn-small" id="importAllBtn" title="Импорт базы из JSON">
+                            <i class="fas fa-upload"></i>
+                        </button>
+                        <button class="icon-btn-small" id="clearStorageBtn" title="Очистить базу" style="color: #c04444;">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="small-btn" id="addEntityBtn"><i class="fas fa-plus"></i> Добавить</button>
+                    </div>
+                </div>
+                <div class="db-tabs">
+                    <button class="db-tab active" data-category="shippers">Грузоотправители</button>
+                    <button class="db-tab" data-category="consignees">Грузополучатели</button>
+                    <button class="db-tab" data-category="carriers">Перевозчики</button>
+                    <button class="db-tab" data-category="drivers">Водители</button>
+                    <button class="db-tab" data-category="signers">Подписанты</button>
+                    <button class="db-tab" data-category="vehicles">ТС</button>
+                    <button class="db-tab" data-category="products">Продукты</button>
+                </div>
+                <div id="dbContent" class="db-content">
+                    <div class="loading-spinner">Загрузка данных...</div>
+                </div>
+            </aside>
+
+            <!-- RIGHT: Form & XML -->
+            <main class="glass-panel form-panel">
+                <div class="panel-header">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Транспортная накладная (Т1) - Новый формат</h3>
+                </div>
+                <form id="etrnForm" class="etrn-form">
+                    <!-- Основные участники перевозки -->
+                    <div class="form-section">
+                        <div class="section-title">Участники перевозки</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Грузоотправитель *</label>
+                                <div id="shippersContainer"></div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-warehouse"></i> Грузополучатель *</label>
+                                <div id="consigneesContainer"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-truck"></i> Перевозчик *</label>
+                                <div id="carriersContainer"></div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Водитель *</label>
+                                <div id="driversContainer"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-car"></i> Транспортное средство</label>
+                                <div id="vehiclesContainer"></div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-signature"></i> Подписант</label>
+                                <div id="signersContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+
+					<!-- Документы и адреса -->
+					<div class="form-section">
+						<div class="section-title">Документы и адреса</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-hashtag"></i> Номер ТТН</label>
+								<input type="text" id="ttnNumber" class="glass-input" placeholder="21323">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-calendar"></i> Дата ТТН</label>
+								<input type="date" id="shipmentDate" class="glass-input">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-file-contract"></i> Номер договора</label>
+								<input type="text" id="contractNumber" class="glass-input" placeholder="Без номера">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-calendar-alt"></i> Дата договора</label>
+								<input type="date" id="contractDate" class="glass-input">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-clock"></i> Время прибытия</label>
+								<input type="time" id="arrivalTime" class="glass-input" step="1">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-clock"></i> Время убытия</label>
+								<input type="time" id="departureTime" class="glass-input" step="1">
+							</div>
+						</div>
+
+						<!-- Адрес отправителя (грузоотправителя) -->
+						<div class="sub-section-header">
+							<i class="fas fa-building"></i> Адрес отправителя (грузоотправителя)
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-map-marker-alt"></i> Индекс (отправитель)</label>
+								<input type="text" id="addressIndex" class="glass-input" placeholder="109472">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-map-marker-alt"></i> Код региона (отправитель)</label>
+								<input type="text" id="addressRegion" class="glass-input" placeholder="77">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-road"></i> Улица (отправитель)</label>
+								<input type="text" id="addressStreet" class="glass-input" placeholder="ВОЛГОГРАДСКИЙ ПР-КТ">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-home"></i> Дом/Корпус (отправитель)</label>
+								<div style="display: flex; gap: 8px;">
+									<input type="text" id="addressHouse" class="glass-input" placeholder="Дом" style="flex:1">
+									<input type="text" id="addressBuilding" class="glass-input" placeholder="Корпус" style="flex:1">
+								</div>
+							</div>
+						</div>
+
+						<!-- Адрес получателя (грузополучателя) -->
+						<div class="sub-section-header" style="margin-top: 20px;">
+							<i class="fas fa-warehouse"></i> Адрес получателя (грузополучателя)
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label><i class="fas fa-map-marker-alt"></i> Индекс доставки (получатель)</label>
+								<input type="text" id="deliveryAddressIndex" class="glass-input" placeholder="420111">
+							</div>
+							<div class="form-group">
+								<label><i class="fas fa-map-marker-alt"></i> Регион доставки (получатель)</label>
+								<input type="text" id="deliveryAddressRegion" class="glass-input" placeholder="03">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group full-width">
+								<label><i class="fas fa-road"></i> Улица, дом (получатель) — при необходимости</label>
+								<input type="text" id="deliveryAddressDetail" class="glass-input" placeholder="ул. Ленина, д. 10">
+							</div>
+						</div>
+					</div>
+
+                    <!-- Отсеки с грузом -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <i class="fas fa-cubes"></i> Отсеки с грузом
+                            <button type="button" class="small-btn" id="addCompartmentBtn" style="margin-left: auto;">
+                                <i class="fas fa-plus"></i> Добавить отсек
+                            </button>
+                        </div>
+                        <div id="compartmentsContainer" class="compartments-container"></div>
+                    </div>
+
+                    <!-- Дополнительная информация -->
+                    <div class="form-section">
+                        <div class="section-title">Дополнительная информация</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-clipboard-list"></i> Метод определения массы</label>
+                                <select id="loadMethod" class="glass-input">
+                                    <option value="01">01 - Взвешивание на весах</option>
+                                    <option value="02">02 - Расчетный метод</option>
+                                    <option value="03">03 - По трафарету</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-check-circle"></i> Состояние груза</label>
+                                <input type="text" id="cargoCondition" class="glass-input" placeholder="Без нареканий">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-ruble-sign"></i> Ценность груза</label>
+                                <input type="text" id="cargoValue" class="glass-input" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" id="generateBtn" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i> Сформировать XML
+                        </button>
+                        <button type="button" id="downloadBtn" class="btn btn-outline">
+                            <i class="fas fa-download"></i> Скачать
+                        </button>
+                        <button type="button" id="copyBtn" class="btn btn-outline">
+                            <i class="fas fa-copy"></i> Копировать
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Preview -->
+                <div class="xml-preview">
+                    <div class="preview-header">
+                        <i class="fas fa-code"></i>
+                        <span>XML Титул Т1 (Новый формат)</span>
+                    </div>
+                    <pre id="xmlPreview">// Заполните данные и нажмите "Сформировать XML"</pre>
+                </div>
+                <div id="statusMsg" class="status-msg"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal для добавления записей -->
+    <div id="entityModal" class="modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 id="modalTitle">Добавить запись</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="modalFields" class="modal-fields"></div>
+            <div class="modal-buttons">
+                <button id="saveEntityBtn" class="btn btn-primary">Сохранить</button>
+                <button id="cancelModalBtn" class="btn btn-outline">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем Dexie.js -->
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
